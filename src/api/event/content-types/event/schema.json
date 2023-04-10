@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "event",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "oponent": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "meetTime": {
+      "type": "time"
+    },
+    "home": {
+      "type": "boolean"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "game",
+        "friendly",
+        "tournament",
+        "training",
+        "indoortraining"
+      ]
+    }
+  }
+}
