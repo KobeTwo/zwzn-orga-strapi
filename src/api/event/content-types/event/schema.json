@@ -33,6 +33,12 @@
         "training",
         "indoortraining"
       ]
+    },
+    "event_responses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::event-response.event-response",
+      "mappedBy": "event"
     }
   }
 }

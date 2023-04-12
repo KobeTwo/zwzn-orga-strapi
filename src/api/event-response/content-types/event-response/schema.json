@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "event_responses",
+  "info": {
+    "singularName": "event-response",
+    "pluralName": "event-responses",
+    "displayName": "EventResponse"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "response": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "maybe"
+      ]
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event.event",
+      "inversedBy": "event_responses"
+    },
+    "player": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::player.player",
+      "inversedBy": "event_responses"
+    }
+  }
+}
