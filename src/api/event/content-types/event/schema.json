@@ -39,6 +39,15 @@
       "relation": "oneToMany",
       "target": "api::event-response.event-response",
       "mappedBy": "event"
+    },
+    "title": {
+      "type": "string"
+    },
+    "startTime": {
+      "type": "time"
+    },
+    "endTime": {
+      "type": "time"
     }
   }
 }
