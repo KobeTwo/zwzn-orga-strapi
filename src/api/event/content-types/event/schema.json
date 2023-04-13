@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "oponent": {
+    "opponent": {
       "type": "string"
     },
     "startDate": {

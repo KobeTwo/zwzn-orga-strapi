@@ -11,7 +11,7 @@ export default {
     afterCreate(event) {
         const { result } = event;
         console.log('after create: ' + JSON.stringify(result))
-        const channelNamePre = result.startDate + ' ' + result.type + ' ' + result.oponent
+        const channelNamePre = result.startDate + ' ' + result.type + ' ' + result.opponent
         const channelName = channelNamePre.replace(/\W+/g, '-').toLowerCase();
         const guild = client.guilds.cache.get(process.env.DISCORD_GUILD_ID);
         if (!guild) return console.error('Unable to find guild.');
