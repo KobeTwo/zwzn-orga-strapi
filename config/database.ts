@@ -68,7 +68,7 @@ export default ({ env }) => {
         client,
         ...connections['postgres'],
         acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 60000),
-      },
-  }
-  
+      }
+    }
+  };
 };
