@@ -1,35 +1,17 @@
-import { parse } from "pg-connection-string";
-
-interface DatabaseConfig {
-  host: string;
-  port: number;
-  database: string;
-  user: string;
-  password: string;
-  ssl: boolean;
-}
-
-interface ConnectionConfig {
-  client: string;
-  connection: DatabaseConfig;
-  debug: boolean;
-}
-
+// ./config/env/production/database.js
+const parse = require("pg-connection-string").parse;
 const config = parse(process.env.DATABASE_URL);
-
-const databaseConfig: DatabaseConfig = {
-  host: config.host || '',
-  port: parseInt(config.port || ''),
-  database: config.database || '',
-  user: config.user || '',
-  password: config.password || '',
-  ssl: false,
-};
-
-const connectionConfig: ConnectionConfig = {
-  client: "postgres",
-  connection: databaseConfig,
-  debug: false,
-};
-
-export default connectionConfig;
+module.exports = () => ({
+  connection: {
+    client: "postgres",
+    connection: {
+      host: config.host,
+      port: config.port,
+      database: config.database,
+      user: config.user,
+      password: config.password,
+      ssl: false,
+    },
+    debug: false,
+  },
+});
