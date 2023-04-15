@@ -23,14 +23,14 @@
         "images"
       ]
     },
-    "managerEmails": {
-      "type": "json"
-    },
     "event_responses": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::event-response.event-response",
       "mappedBy": "player"
+    },
+    "managerEmails": {
+      "type": "text"
     }
   }
 }

@@ -58,7 +58,7 @@ export default ({ env }) => {
     return {
       connection: {
         client,
-        ...connections['sqllite'],
+        ...connections['sqlite'],
         acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 60000),
       },
     };
