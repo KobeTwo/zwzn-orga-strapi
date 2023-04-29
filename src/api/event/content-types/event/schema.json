@@ -15,11 +15,11 @@
     "opponent": {
       "type": "string"
     },
-    "startDate": {
-      "type": "date"
+    "startDateTime": {
+      "type": "datetime"
     },
-    "meetTime": {
-      "type": "time"
+    "meetDateTime": {
+      "type": "datetime"
     },
     "home": {
       "type": "boolean"
@@ -43,11 +43,8 @@
     "title": {
       "type": "string"
     },
-    "startTime": {
-      "type": "time"
-    },
-    "endTime": {
-      "type": "time"
+    "endDateTime": {
+      "type": "datetime"
     }
   }
 }

@@ -1,5 +1,6 @@
 //Execution Example: node scripts/createTrainings.js http://localhost:1337 testApiKey Monday 16:00:00 16:30:00 18:00:00  2023-08-01 2023-08-31 
 const axios = require('axios');
+const moment = require('moment-timezone');
 
 
 
@@ -8,21 +9,33 @@ const createEvents = async (startDate, endDate, apiHost, apiKey) => {
     // Define the event data to be created for each weekday
     const eventTemplate = {
         title: 'Training',
-        type: 'training',
-        startTime: startTime,
-        meetTime: meetTime,
-        endTime: endTime
+        type: 'training'
   };
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  moment.tz.setDefault('Europe/Berlin');
+  let currentDate = moment.tz(startDate + 'T12:00:00', 'Europe/Berlin');
+  console.log(currentDate);
+  let startTimeDate = moment.tz(startDate + 'T' + startTime , 'Europe/Berlin');
+  console.log(startTimeDate);
+  let meetTimeDate = moment.tz(startDate + 'T' + meetTime, 'Europe/Berlin');
+  let endTimeDate = moment.tz(startDate + 'T' + endTime, 'Europe/Berlin');
+  const endDateTZ = moment.tz(endDate, 'Europe/Berlin');
 
-  let currentDate = new Date(startDate);
-  while (currentDate <= endDate) {
-    if (days[currentDate.getDay()] === weekday) { 
-      console.log('StartDate: ' + currentDate.toISOString());
+  console.log(currentDate);
+  console.log(endDateTZ);
+  while (currentDate.isBefore(endDateTZ)) {
+    
+    if (currentDate.format('dddd') === weekday) { 
+      console.log(currentDate.format('dddd'));
+      console.log(currentDate.format('YYYY-MM-DD HH:mm:ss:ssZ'));
+        console.log(currentDate.clone().utc().format('YYYY-MM-DD HH:mm:ss:ssZ'));
+        console.log(startTimeDate.format('YYYY-MM-DD HH:mm:ss:ssZ'));
+        console.log(startTimeDate.clone().utc().format('YYYY-MM-DD HH:mm:ss:ssZ'));
       const eventData = {
         data: {
             ...eventTemplate,
-            startDate: currentDate.toISOString(),
+            startDateTime: startTimeDate.format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
+            meetDateTime: meetTimeDate.format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
+            endDateTime: endTimeDate.format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
         }
       };
       try {
@@ -36,7 +49,11 @@ const createEvents = async (startDate, endDate, apiHost, apiKey) => {
         console.error(error);
       }
     }
-    currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
+    console.log(currentDate.format('BEFORE ADD:' + 'YYYY-MM-DD HH:mm:ss:ssZ'));
+    currentDate = currentDate.add(1, 'day');
+    startTimeDate = startTimeDate.add(1, 'day');
+    meetTimeDate = meetTimeDate.add(1, 'day');
+    endTimeDate = endTimeDate.add(1, 'day');
   }
 };
 
@@ -48,8 +65,8 @@ const weekday = args[2];
 const startTime = args[3];
 const meetTime = args[4];
 const endTime = args[5];
-const startDate = new Date(args[6] + 'T12:00:00.000Z');
-const endDate = new Date(args[7]+ 'T12:00:00.000Z');
+const startDate = args[6];
+const endDate = args[7];
 
 
 // Call the createEvents function to create the events

@@ -13,6 +13,9 @@ RUN npm install
 # Copy the application files
 WORKDIR /opt/app
 COPY ./ .
+# Set timezone to Berlin
+RUN ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+RUN dpkg-reconfigure -f noninteractive tzdata
 # Build the Strapi application
 RUN yarn build
 # Expose the Strapi port
