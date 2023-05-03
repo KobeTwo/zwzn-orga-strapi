@@ -4,7 +4,8 @@
   "info": {
     "singularName": "event-response",
     "pluralName": "event-responses",
-    "displayName": "EventResponse"
+    "displayName": "EventResponse",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -16,7 +17,8 @@
       "enum": [
         "yes",
         "no",
-        "maybe"
+        "maybe",
+        "notnominated"
       ]
     },
     "event": {
